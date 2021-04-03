@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddRecipeComponent } from './add-recipe/add-recipe.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { AddRecipeComponent } from 'components/add-recipe/add-recipe.component';
+import { NavbarComponent } from 'components/navbar/navbar.component';
+import { BackendService } from 'services/backend/backend.service';
+import { RecipeService } from 'services/recipe/recipe.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,10 +19,15 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    ReactiveFormsModule,
+    NgbModule,
   ],
-  providers: [],
+  providers: [
+    BackendService,
+    RecipeService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

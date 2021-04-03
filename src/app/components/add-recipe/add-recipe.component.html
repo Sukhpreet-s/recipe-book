@@ -1,0 +1,110 @@
+<div class="card mt-5 mx-5">
+  <form [formGroup]="recipeForm" class="d-flex flex-column align-items-center mt-5">
+    <!-- Name  -->
+    <h2 class="text-center">Give it a Name</h2>
+    <div class="input-group recipe-name-input-group mt-2">
+      <input 
+        type="text" 
+        formControlName="dishName" 
+        placeholder="The name is.." 
+        class="form-control text-center"
+        [class.is-invalid]="dishName?.invalid && (dishName?.dirty || dishName?.touched)"
+        [class.is-valid]="dishName?.valid && dishName?.touched"
+      >
+      <div class="invalid-feedback">
+        <div *ngIf="dishName?.errors?.minlength">
+          Name must be atleast 4 characters long.
+        </div>
+        <div *ngIf="dishName?.errors?.required">
+          Name is required.
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Ingredients  -->
+    <div class="input-group recipe-ingredients-input-group mt-5 mb-3">
+      <input 
+        type="text" 
+        formControlName="currentIngredient" 
+        class="form-control" 
+        placeholder="Ingredient Name"
+        [class.is-invalid]="ingredientName?.invalid && (ingredientName?.dirty || ingredientName?.touched)"
+        [class.is-valid]="ingredientName?.valid && ingredientName?.touched"
+      >
+      <input 
+        type="text" 
+        formControlName="currentQuantity" 
+        class="form-control" 
+        placeholder="Qty."
+        [class.is-invalid]="ingredientQuantity?.invalid && (ingredientQuantity?.dirty || ingredientQuantity?.touched)"
+        [class.is-valid]="ingredientQuantity?.valid && ingredientQuantity?.touched"
+      >
+      <!-- Disable this button if above inputs are invalid  -->
+      <button 
+        class="btn btn-outline-success" 
+        (click)="addIngredient()" 
+        type="button"
+        [disabled]="ingredientName?.errors || ingredientQuantity?.errors"
+      >
+        <i class="bi-plus"></i>
+      </button>
+    
+      <!-- ingredient name validation -->
+      <div *ngIf="ingredientName?.invalid && (ingredientName?.dirty || ingredientName?.touched)" class="invalid-feedback">
+        <div *ngIf="ingredientName?.errors?.required">
+          Name is required.
+        </div>
+        <div *ngIf="ingredientName?.errors?.minlength">
+          Name must be atleast 4 characters long.
+        </div>
+      </div>
+      <!-- ingredient quantity validation  -->
+      <div *ngIf="ingredientQuantity?.invalid && (ingredientQuantity?.dirty || ingredientQuantity?.touched)" class="invalid-feedback">
+        <div *ngIf="ingredientQuantity?.errors?.required">
+          Quantity is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- List ingredients  -->
+    <div 
+      formArrayName="ingredients"
+      *ngFor="let ingredient of ingredients.controls; let i = index"
+      class="input-group recipe-ingredients-list"
+    >
+      <ng-container [formGroupName]="i">
+        <input type="text" formControlName="name" class="form-control" placeholder="Ingredient Name">
+        <input type="text" formControlName="quantity" class="form-control" placeholder="Qty.">
+        <button class="btn btn-outline-danger" (click)="removeIngredient(i)" type="button"><i class="bi-trash"></i></button>
+      </ng-container>
+    </div>
+
+    <!-- Instructions  -->
+    <div class="form-floating recipe-instructions my-5">
+      <textarea 
+        class="form-control" 
+        formControlName="instructions" 
+        placeholder="Add instructions here" 
+        id="recipe-instructions"
+        [class.is-invalid]="instructions?.invalid && (instructions?.dirty || instructions?.touched)"
+        [class.is-valid]="instructions?.valid && instructions?.touched"
+      ></textarea>
+      <label for="recipe-instructions">Add instructions here</label>
+
+      <!-- instructions validation  -->
+      <div class="invalid-feedback">
+        <div *ngIf="instructions?.errors?.required">
+          Instructions are required.
+        </div>
+        <div *ngIf="instructions?.errors?.minlength">
+         Must be atleast 10 characters long.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mb-5" (click)="handleSubmit()">Create!</button>
+    
+  </form>
+
+</div>
