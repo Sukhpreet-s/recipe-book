@@ -20,9 +20,9 @@ export class AddRecipeComponent implements OnInit {
 
     this.recipeForm = new FormGroup({
       dishName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      ingredients: new FormArray([]),
-      currentIngredient: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      currentQuantity: new FormControl('', [Validators.required]),
+      ingredients: new FormArray([], [Validators.required]),
+      currentIngredient: new FormControl(''),
+      currentQuantity: new FormControl(''),
       instructions: new FormControl('', [Validators.required, Validators.minLength(10)]),
     })
   }
@@ -48,14 +48,15 @@ export class AddRecipeComponent implements OnInit {
   }
 
   handleSubmit(): void {
-
     if (this.recipeForm.valid) {
+      console.log(this.recipeForm.value)
+      
 
       const { dishName, instructions } = this.recipeForm.value;
       const ingredients: Ingredient[] = this.recipeForm.controls.ingredients.value;
   
-      this.backendService.createRecipe({ dishName, ingredients, recipeInstructions: instructions })
-        .subscribe(() => this.router.navigate(['/']));
+      this.backendService.createRecipe({ dishName, ingredients, recipeInstruction: instructions })
+        .subscribe(() => this.router.navigate(['/list-recipes']));
     }
       
   }

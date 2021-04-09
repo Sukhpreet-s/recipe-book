@@ -10,12 +10,14 @@ import { NavbarComponent } from 'components/navbar/navbar.component';
 import { BackendService } from 'services/backend/backend.service';
 import { RecipeService } from 'services/recipe/recipe.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListRecipesComponent } from './components/list-recipes/list-recipes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddRecipeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListRecipesComponent
   ],
   imports: [
     BrowserModule,

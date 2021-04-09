@@ -16,6 +16,15 @@ export class BackendService {
   ) { }
 
   /**
+   * Get all recipes.
+   * @returns List of recipes stored in the server.
+   */
+  public getAllRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.apiUrlRecipeEndpoint)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * Adds the recipes
    * @param recipe new recipe to add
    * @returns recipe observable
