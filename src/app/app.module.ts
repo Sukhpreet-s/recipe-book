@@ -11,13 +11,15 @@ import { BackendService } from 'services/backend/backend.service';
 import { RecipeService } from 'services/recipe/recipe.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListRecipesComponent } from './components/list-recipes/list-recipes.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddRecipeComponent,
     NavbarComponent,
-    ListRecipesComponent
+    ListRecipesComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
