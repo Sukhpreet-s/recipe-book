@@ -13,10 +13,12 @@
       </p>
     </div>
 
-    <div class="col-5" *ngIf="recipe.ingredients && recipe.ingredients.length > 0">
-      <ul class="mt-3">
+    <div class="col-5">
+      <ul class="mt-3 p-0" *ngIf="recipe.ingredients && recipe.ingredients.length > 0">
         <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} - {{ingredient.name}}</li>
       </ul>
+
+      <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe)">Delete</button> 
     </div>
 
   </div>

@@ -34,6 +34,16 @@ export class BackendService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Deletes a recipe by id
+   * @param recipeId id of recipe to delete
+   * @returns Observable
+   */
+  public deleteRecipeById(recipeId: String): Observable<Response> {
+    return this.http.delete<Response>(`${this.apiUrlRecipeEndpoint}/${recipeId}`)
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

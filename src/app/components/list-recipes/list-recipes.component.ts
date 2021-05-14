@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'models/Recipe';
-import { BackendService } from 'services/backend/backend.service';
+import { RecipeService } from 'services/recipe/recipe.service';
 
 @Component({
   selector: 'app-list-recipes',
@@ -8,19 +8,29 @@ import { BackendService } from 'services/backend/backend.service';
   styleUrls: ['./list-recipes.component.scss']
 })
 export class ListRecipesComponent implements OnInit {
-  backendService: BackendService;
-  recipeList: Recipe[];
+  recipeService: RecipeService;
 
-  constructor(backendService: BackendService) {
-    this.backendService = backendService;
-    this.recipeList = [];
+  constructor(recipeService: RecipeService) {
+    this.recipeService = recipeService;
    }
 
   ngOnInit(): void {
-    // fetch data from api
-    this.backendService.getAllRecipes()
-      .subscribe(recipes => this.recipeList = recipes);
-    
+    // fetch data from api    
+    this.recipeService.loadAll();
+  }
+
+  // Getters
+  get recipeList() {
+    return this.recipeService.getAll();
+  }
+
+  // Event handlers
+  deleteRecipe(recipe: Recipe): void {
+    if (recipe.id) {
+      this.recipeService.deleteById(recipe.id);
+    } else {
+      console.log("Error while removing")
+    }
   }
 
 }

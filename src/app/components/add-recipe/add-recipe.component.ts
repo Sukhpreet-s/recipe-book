@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router"
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'models/Ingredient';
+import { Recipe } from 'models/Recipe';
 import { BackendService } from 'services/backend/backend.service';
+import { RecipeService } from 'services/recipe/recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -10,13 +12,13 @@ import { BackendService } from 'services/backend/backend.service';
   styleUrls: ['./add-recipe.component.scss']
 })
 export class AddRecipeComponent implements OnInit {
-  backendService: BackendService;
+  recipeService: RecipeService;
 
   // Data
   recipeForm: FormGroup;
 
-  constructor(backendService: BackendService, private router: Router) {
-    this.backendService = backendService;
+  constructor(recipeService: RecipeService, private router: Router) {
+    this.recipeService = recipeService;
 
     this.recipeForm = new FormGroup({
       dishName: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -64,8 +66,14 @@ export class AddRecipeComponent implements OnInit {
     if (this.recipeForm.valid) {
       const { dishName, instructions } = this.recipeForm.value;
       const ingredients: Ingredient[] = this.recipeForm.controls.ingredients.value;
-  
-      this.backendService.createRecipe({ dishName, ingredients, recipeInstruction: instructions })
+
+      const recipe: Recipe = {
+        dishName,
+        ingredients,
+        recipeInstruction: instructions
+      };
+
+      this.recipeService.add(recipe)
         .subscribe(() => this.router.navigate(['/list-recipes']));
     } 
       
