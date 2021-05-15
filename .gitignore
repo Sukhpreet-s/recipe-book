@@ -44,3 +44,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Angular environment variable
+environment.ts
+environment.prod.ts
+.env
