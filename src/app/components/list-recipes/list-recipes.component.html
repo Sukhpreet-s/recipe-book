@@ -1,40 +1,43 @@
 <div class="my-5 list-recipes">
-
-  <div
-    *ngFor="let recipe of recipeList" 
-    class="card mt-3 p-2"
-  >
+  <div *ngFor="let recipe of recipeList" class="card mt-3 p-2">
     <div class="card-body row gx-5">
 
-    <div class="col-7">
-      <h3 class="card-title mb-4">{{recipe.dishName}}</h3>
-      <p class="card-text">
-        {{recipe.recipeInstruction}}
-      </p>
+      <!-- Image container  -->
+      <!-- TODO: Currently using first image from all images as thumbnail. Change it to use and store actual thumbnail  -->
+      <div *ngIf="recipe.images!=undefined && recipe.images[0]!=undefined; else undefinedImage"
+        class="img-container col-3">
+        <img class="thumbnail" width="168" height="168" src="{{recipe.images[0]}}" />
+      </div>
+      <!-- Default image to show as fallback  -->
+      <ng-template #undefinedImage>
+        <div class="img-container col-3">
+          <img width="168" height="168" src="assets/images/recipe-thumbnail-test.jpg" />
+        </div>
+      </ng-template>
+      <!-- Image container ends -->
+
+      <!-- Mid container  -->
+      <div class="mid-container col-6">
+        <h3 class="card-title mb-5">{{recipe.dishName}}</h3>
+        <div *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="mt-5 ingredients-container">
+          <span class="badge bg-secondary p-2" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name |
+            titlecase}}</span>
+        </div>
+      </div>
+      <!-- Mid container ends -->
+
+      <!-- Buttons container  -->
+      <div class="col-3">
+        <div class="row mt-5 mb-3 w-50">
+          <!-- TODO: Show recipe details  -->
+          <button type="button" class="btn btn-info">Details</button>
+        </div>
+        <div class="row w-50">
+          <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe)">Delete</button>
+        </div>
+      </div>
+      <!-- Buttons container ends -->
+
     </div>
-
-    <div class="col-5">
-      <ul class="mt-3 p-0" *ngIf="recipe.ingredients && recipe.ingredients.length > 0">
-        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} - {{ingredient.name}}</li>
-      </ul>
-
-      <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe)">Delete</button> 
-    </div>
-
-  </div>
-
   </div>
 </div>
-
-<!-- Template info
-Instant Pot Bloop and broccoli
-Shrimp and broccoli stir-fry doesn't get any faster or easier than this. Zero minutes is not a typo. The pot will take 10 minutes to come to pressure and that is all the cook time the shrimp needs. Serve over rice if desired.
-Release pressure carefully using the quick-release method according to manufacturer's instructions, about 2 minutes. Unlock and remove the lid. Stir in cornstarch slurry and broccoli. Select Saute function and cook until sauce thickens and broccoli is crisp-tender, about 2 minutes.
-<li>2 tablespoons oyster sauce</li>
-<li>1 tablespoon rice vinegar</li>
-<li>2 teaspoons sesame oil</li>
-<li>1 teaspoon brown sugar</li>
-<li>1 teaspoon Sriracha sauce</li>
-<li>1 teaspoon minced garlic</li>
-<li>1 pound raw peeled and deveined shrimp</li>
-<li>2 tablespoons cold water</li> -->

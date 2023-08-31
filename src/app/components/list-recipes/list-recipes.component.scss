@@ -2,4 +2,26 @@
     li {
         list-style-type: none;
     }
+
+    .card-body {
+        height: 200px;
+
+        .img-container {
+            height: 100%;
+            overflow: hidden;
+
+            .thumbnail {
+                width: 100%;
+            }
+        }
+
+        .mid-container {
+            .ingredients-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+        }
+
+    }
 }

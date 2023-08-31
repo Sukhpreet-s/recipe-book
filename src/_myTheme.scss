@@ -5,6 +5,7 @@ $ruby: rgba(216, 30, 91, 1);
 $prussian-blue: rgba(35, 57, 91, 1);
 $canary: rgba(255, 253, 152, 1);
 $max-blue-purple: rgba(180, 160, 229, 1);
+$dark-green: #638834;
 
 /* SCSS Gradient */
 $gradient-top: linear-gradient(0deg, #b9e3c6ff, #59c9a5ff, #d81e5bff, #23395bff, #fffd98ff);
@@ -18,9 +19,9 @@ $gradient-bottom-left: linear-gradient(315deg, #b9e3c6ff, #59c9a5ff, #d81e5bff, 
 $gradient-radial: radial-gradient(#b9e3c6ff, #59c9a5ff, #d81e5bff, #23395bff, #fffd98ff);
 
 $primary: $turquoise-green;
-$secondary: $prussian-blue;
+$secondary: $dark-green;
 $success: $ocean-green;
-$info: $max-blue-purple;
+$info: $prussian-blue;
 $danger: $ruby;
 $warning: $canary;
 

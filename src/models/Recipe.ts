@@ -5,5 +5,5 @@ export interface Recipe {
   dishName: String;
   recipeInstruction: String;
   ingredients: Ingredient[];
-  imagesUrls?: String;
+  images?: String[];
 }
