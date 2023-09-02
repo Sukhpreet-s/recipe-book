@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router"
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'models/Ingredient';
 import { Recipe } from 'models/Recipe';
 import { BackendService } from 'services/backend/backend.service';
@@ -15,17 +15,17 @@ export class AddRecipeComponent implements OnInit {
   recipeService: RecipeService;
 
   // Data
-  recipeForm: FormGroup;
+  recipeForm: UntypedFormGroup;
 
   constructor(recipeService: RecipeService, private router: Router) {
     this.recipeService = recipeService;
 
-    this.recipeForm = new FormGroup({
-      dishName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      ingredients: new FormArray([], [Validators.required]),
-      currentIngredient: new FormControl(''),
-      currentQuantity: new FormControl(''),
-      instructions: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    this.recipeForm = new UntypedFormGroup({
+      dishName: new UntypedFormControl('', [Validators.required, Validators.minLength(4)]),
+      ingredients: new UntypedFormArray([], [Validators.required]),
+      currentIngredient: new UntypedFormControl(''),
+      currentQuantity: new UntypedFormControl(''),
+      instructions: new UntypedFormControl('', [Validators.required, Validators.minLength(10)]),
     })
   }
 
@@ -38,9 +38,9 @@ export class AddRecipeComponent implements OnInit {
    */
   addIngredient(): void {
 
-    const newIngredientGroup = new FormGroup({
-      name: new FormControl({ value: this.ingredientName?.value, disabled: true }),
-      quantity: new FormControl({ value: this.ingredientQuantity?.value, disabled: true }),
+    const newIngredientGroup = new UntypedFormGroup({
+      name: new UntypedFormControl({ value: this.ingredientName?.value, disabled: true }),
+      quantity: new UntypedFormControl({ value: this.ingredientQuantity?.value, disabled: true }),
     });
     
     this.ingredients.push(newIngredientGroup);
@@ -83,7 +83,7 @@ export class AddRecipeComponent implements OnInit {
   get dishName() { return this.recipeForm.get('dishName'); }
   get ingredientName() { return this.recipeForm.get('currentIngredient'); }
   get ingredientQuantity() { return this.recipeForm.get('currentQuantity'); }
-  get ingredients(): FormArray { return <FormArray> this.recipeForm.get('ingredients');}
+  get ingredients(): UntypedFormArray { return <UntypedFormArray> this.recipeForm.get('ingredients');}
   get instructions() { return this.recipeForm.get('instructions'); }
 
 
@@ -92,7 +92,7 @@ export class AddRecipeComponent implements OnInit {
    * Ref: https://stackoverflow.com/questions/40529817/reactive-forms-mark-fields-as-touched
    * @param formGroup - The form group to touch
    */
-   private markFormGroupTouched(formGroup: FormGroup) {
+   private markFormGroupTouched(formGroup: UntypedFormGroup) {
     (<any>Object).values(formGroup.controls).forEach((control: AbstractControl) => {
       control.markAsTouched();
     });
