@@ -4,9 +4,15 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "services/*": ["src/app/services/*"],
-      "components/*": ["src/app/components/*"],
-      "models/*": ["src/models/*"],
+      "services/*": [
+        "src/app/services/*"
+      ],
+      "components/*": [
+        "src/app/components/*"
+      ],
+      "models/*": [
+        "src/models/*"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -19,12 +25,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
