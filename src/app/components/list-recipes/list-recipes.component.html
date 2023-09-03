@@ -30,7 +30,7 @@
       <div class="col-3">
         <div class="row mt-5 mb-3 w-50">
           <!-- TODO: Show recipe details  -->
-          <button type="button" class="btn btn-info">Details</button>
+          <a [routerLink]="['/recipe-details', recipe.id]" class="btn btn-info">Details</a>
         </div>
         <div class="row w-50">
           <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe)">Delete</button>

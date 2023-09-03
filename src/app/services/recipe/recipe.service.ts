@@ -43,4 +43,8 @@ export class RecipeService {
   add(recipe: Recipe): Observable<Recipe> {
     return this.backendService.createRecipe(recipe);
   }
+
+  getById(id: String): Observable<Recipe> {
+    return this.backendService.getRecipeById(id);
+  }
 }

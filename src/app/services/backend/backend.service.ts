@@ -35,6 +35,16 @@ export class BackendService {
   }
 
   /**
+   * Get the recipe by id
+   * @param id Id of the recipe
+   * @returns recipe observable
+   */
+  public getRecipeById(id: String): Observable<Recipe> {
+    return this.http.get<Recipe>(this.apiUrlRecipeEndpoint+"/"+id)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * Deletes a recipe by id
    * @param recipeId id of recipe to delete
    * @returns Observable

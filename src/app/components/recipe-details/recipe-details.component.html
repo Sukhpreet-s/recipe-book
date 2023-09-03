@@ -1,0 +1,16 @@
+<div *ngIf="recipe; else loading">
+
+	<h1 class="mt-5">{{recipe.dishName}}</h1>
+	<p>{{recipe.recipeInstruction}}</p>
+	<ul>
+		<li *ngFor="let ingredient of recipe.ingredients">
+			{{ingredient.name}} - {{ingredient.quantity}}
+		</li>
+	</ul>
+	<div *ngIf="recipe.images">
+		<img *ngFor="let image of recipe.images" [src]="image"/>
+	</div>
+</div>
+<ng-template #loading>
+	<h3>Loading...</h3>
+</ng-template>
