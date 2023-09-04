@@ -1,0 +1,25 @@
+<input class="form-control" type="file" #fileInput accept="image/*" [ngModel]="null" [disabled]="disabled"
+	(ngModelChange)="onFileChange($event)" (click)="onFileInputClick()">
+
+
+<div *ngIf="croppedImage?.objectURL && closeResult!=''" class="mt-2 d-flex justify-content-center">
+	<img [src]="croppedImage?.objectURL" width="150" alt="Cropped Image">
+</div>
+
+<!-- Modal  -->
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Crop your image</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<!-- Mode body here  -->
+		<image-cropper [imageFile]="selectedImage" [aspectRatio]="4/3" [maintainAspectRatio]="true" format="jpeg"
+			(imageCropped)="onImageCropped($event)"></image-cropper>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>

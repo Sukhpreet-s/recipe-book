@@ -14,6 +14,9 @@ import { ListRecipesComponent } from './components/list-recipes/list-recipes.com
 import { AboutComponent } from './components/about/about.component';
 import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { FileInputAccessorModule } from 'file-input-accessor';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
     NavbarComponent,
     ListRecipesComponent,
     AboutComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,8 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
+    ImageCropperModule,
+    FileInputAccessorModule,
   ],
   providers: [
     BackendService,

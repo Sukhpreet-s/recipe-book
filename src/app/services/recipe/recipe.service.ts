@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from 'models/Recipe';
+import { ImageWithObjectURL } from 'models/util';
 import { Observable } from 'rxjs';
 import { BackendService } from 'services/backend/backend.service';
 
@@ -46,5 +47,9 @@ export class RecipeService {
 
   getById(id: String): Observable<Recipe> {
     return this.backendService.getRecipeById(id);
+  }
+
+  uploadThumbnail(image: ImageWithObjectURL): Observable<String[]> {
+    return this.backendService.uploadImage(image);
   }
 }

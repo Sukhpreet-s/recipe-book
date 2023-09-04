@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Recipe } from 'src/models/Recipe';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ImageWithObjectURL } from 'models/util';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,33 @@ export class BackendService {
   public deleteRecipeById(recipeId: String): Observable<Response> {
     return this.http.delete<Response>(`${this.apiUrlRecipeEndpoint}/${recipeId}`)
       .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Upload image and get urls for the image.
+   * @param image ImageWithObjectURL
+   * @returns observable for list of urls to the image
+   */
+  public uploadImage(image: ImageWithObjectURL): Observable<String[]> {
+
+    const response$ = new Observable<String[]>((observer) => {
+
+      fetch(image.objectURL).then(res => res.blob()).then(blob => {
+        const file = new File([blob], image.name);
+        const fd = new FormData();
+        fd.append('images', file);
+
+        this.http.post<String[]>(this.apiUrlRecipeEndpoint + "/upload-multi-images", fd)
+          .pipe(catchError(this.handleError))
+          .subscribe(response => observer.next(response))
+      });
+
+      return {
+        unsubscribe() {}
+      }
+    })
+
+    return response$;
   }
 
   // Error handling

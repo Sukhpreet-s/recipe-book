@@ -25,6 +25,8 @@
     "@ng-bootstrap/ng-bootstrap": "^15.1.1",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.0",
+    "file-input-accessor": "^16.0.0",
+    "ngx-image-cropper": "^7.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.1"

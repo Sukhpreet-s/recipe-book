@@ -22,6 +22,25 @@
       </div>
     </div>
 
+    <!-- Image upload  -->
+    <h2 class="text-center mt-5">Pick an image for your recipe</h2>
+    <div class="input-group recipe-name-input-group mt-2">
+      <app-image-uploader 
+        formControlName="thumbnail" 
+        class="w-100"
+        [class.is-invalid]="thumbnail?.invalid && thumbnail?.touched"
+        [class.is-valid]="thumbnail?.valid && thumbnail?.touched"
+      ></app-image-uploader>
+      <div class="invalid-feedback">
+        <div *ngIf="thumbnail?.errors?.required">
+          One image is required.
+        </div>
+        <div *ngIf="thumbnail?.errors?.mustBeLessThan1MB">
+          Selected image must be less than 1MB.
+        </div>
+      </div>
+    </div>
+    
     <!-- Ingredients  -->
     <div class="input-group recipe-ingredients-input-group mt-5 mb-3">
       <input 
