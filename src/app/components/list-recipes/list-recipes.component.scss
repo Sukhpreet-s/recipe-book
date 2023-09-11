@@ -4,14 +4,14 @@
     }
 
     .card-body {
-        height: 200px;
+        overflow: hidden;
 
         .img-container {
-            height: 100%;
-            overflow: hidden;
 
             .thumbnail {
                 width: 100%;
+                max-width: 500px;
+                min-width: 275px;
             }
         }
 

@@ -1,25 +1,25 @@
 <div class="my-5 list-recipes">
   <div *ngFor="let recipe of recipeList" class="card mt-3 p-2">
-    <div class="card-body row gx-5">
+    <div class="card-body row justify-content-between">
 
       <!-- Image container  -->
       <!-- TODO: Currently using first image from all images as thumbnail. Change it to use and store actual thumbnail  -->
       <div *ngIf="recipe.images!=undefined && recipe.images[0]!=undefined; else undefinedImage"
-        class="img-container col-3">
-        <img class="thumbnail" width="168" height="168" src="{{recipe.images[0]}}" />
+        class="img-container d-md-flex justify-content-center col-lg-3">
+        <img class="thumbnail" src="{{recipe.images[0]}}" />
       </div>
       <!-- Default image to show as fallback  -->
       <ng-template #undefinedImage>
-        <div class="img-container col-3">
+        <div class="img-container col-lg-3">
           <img width="168" height="168" src="assets/images/recipe-thumbnail-test.jpg" />
         </div>
       </ng-template>
       <!-- Image container ends -->
 
       <!-- Mid container  -->
-      <div class="mid-container col-6">
-        <h3 class="card-title mb-5">{{recipe.dishName}}</h3>
-        <div *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="mt-5 ingredients-container">
+      <div class="mid-container col-lg-6">
+        <h3 class="card-title mt-2 text-center">{{recipe.dishName}}</h3>
+        <div *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="mt-3 ingredients-container">
           <span class="badge bg-secondary p-2" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name |
             titlecase}}</span>
         </div>
@@ -27,13 +27,15 @@
       <!-- Mid container ends -->
 
       <!-- Buttons container  -->
-      <div class="col-3">
-        <div class="row mt-5 mb-3 w-50">
-          <!-- TODO: Show recipe details  -->
+      <div class="pt-3 row justify-content-center col-lg-2 pt-lg-3">
+        <!-- TODO: Show recipe details  -->
+        <div class="col-3 col-lg-12">
+
           <a [routerLink]="['/recipe-details', recipe.id]" class="btn btn-info">Details</a>
         </div>
-        <div class="row w-50">
-          <button type="button" class="btn btn-danger" (click)="deleteRecipe(recipe)">Delete</button>
+        <div class="col-3 col-lg-12">
+
+          <button type="button" class="btn btn-danger " (click)="deleteRecipe(recipe)">Delete</button>
         </div>
       </div>
       <!-- Buttons container ends -->
