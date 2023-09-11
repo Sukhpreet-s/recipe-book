@@ -17,6 +17,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { FileInputAccessorModule } from 'file-input-accessor';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AboutComponent,
     RecipeDetailsComponent,
     ImageUploaderComponent,
+    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,

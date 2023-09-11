@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from 'components/delete-modal/delete-modal.component';
 import { Recipe } from 'models/Recipe';
 import { RecipeService } from 'services/recipe/recipe.service';
 
@@ -10,7 +12,9 @@ import { RecipeService } from 'services/recipe/recipe.service';
 export class ListRecipesComponent implements OnInit {
   recipeService: RecipeService;
 
-  constructor(recipeService: RecipeService) {
+  closeResult = '';
+
+  constructor(recipeService: RecipeService, private modalService: NgbModal) {
     this.recipeService = recipeService;
    }
 
@@ -30,6 +34,35 @@ export class ListRecipesComponent implements OnInit {
       this.recipeService.deleteById(recipe.id);
     } else {
       console.log("Error while removing")
+    }
+  }
+
+  // Modal functions
+
+  // Function to open the delete confirmation modal
+  openDeleteConfirmationModal(recipe: Recipe) {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+        // Handle the delete action here if confirmed
+        if (result === 'Delete') {
+          this.deleteRecipe(recipe);
+        }
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
     }
   }
 
