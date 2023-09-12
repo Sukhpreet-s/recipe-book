@@ -5,12 +5,12 @@
       <!-- Image container  -->
       <!-- TODO: Currently using first image from all images as thumbnail. Change it to use and store actual thumbnail  -->
       <div *ngIf="recipe.images!=undefined && recipe.images[0]!=undefined; else undefinedImage"
-        class="img-container d-md-flex justify-content-center col-lg-3">
+        class="img-container d-md-flex justify-content-center col-lg-4">
         <img class="thumbnail" src="{{recipe.images[0]}}" />
       </div>
       <!-- Default image to show as fallback  -->
       <ng-template #undefinedImage>
-        <div class="img-container col-lg-3">
+        <div class="img-container col-lg-4">
           <img width="168" height="168" src="assets/images/recipe-thumbnail-test.jpg" />
         </div>
       </ng-template>
